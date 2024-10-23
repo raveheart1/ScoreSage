@@ -14,7 +14,7 @@
 - **Azure Data Lake/Blob Storage**: For storing raw and processed sports data.
 - **Azure Databricks**: For feature engineering and data processing.
 - **Azure Machine Learning**: For model training, evaluation, and management.
-- **Azure Kubernetes Service (AKS)** / **Azure Functions**: For deploying the prediction engine.
+- **Azure Functions**: For deploying the prediction engine.
 - **Azure Monitor**: For tracking model performance and usage analytics.
 
 ## Getting Started
