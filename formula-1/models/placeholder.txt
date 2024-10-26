@@ -1,1 +1,3 @@
 text
+
+what do I need to modify in these scripts if I want the data to go into my existing data folder. Here is the current folder structure

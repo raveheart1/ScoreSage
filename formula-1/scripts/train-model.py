@@ -9,22 +9,27 @@ import joblib
 
 # Loading Data
 # Function to load all CSV files from a directory structure for a specific race.
-
-def load_all_data(root_dir, race_location):
+def load_all_data(root_dir, race_location=None):
     dataframes = []
     for root, _, files in os.walk(root_dir):
         for file in files:
-            if file.endswith('.csv') and race_location in root:
-                file_path = os.path.join(root, file)
-                df = pd.read_csv(file_path)
-                dataframes.append(df)
+            if file.endswith('.csv'):
+                if race_location is None or race_location in root:
+                    file_path = os.path.join(root, file)
+                    df = pd.read_csv(file_path)
+                    dataframes.append(df)
     return pd.concat(dataframes, ignore_index=True)
 
-# Change to Singapore or Monza Grand Prix
+# Option to load data for all Grand Prix events or a specific one
 root_data_dir = './data/drivers/'
-race_location = 'great_britain'  # Change this to 'singapore' or any other race location
+load_all = True  # Set to True to load all data, False to load specific race data
+race_location = 'great_britain'  # Change this if needed
 
-data = load_all_data(root_data_dir, race_location)
+# Load data accordingly
+if load_all:
+    data = load_all_data(root_data_dir)
+else:
+    data = load_all_data(root_data_dir, race_location)
 
 # Data Preprocessing
 # Inspect the available columns
@@ -37,7 +42,8 @@ common_columns = data.columns
 # Automatically select common numeric features for training
 features = [
     col for col in common_columns
-    if col not in ['position', 'date', 'driver_number', 'meeting_key', 'session_key'] and data[col].dtype in ['int64', 'float64']
+    if col not in ['position', 'date', 'driver_number', 'meeting_key', 'session_key', 'driver_name']
+    and data[col].dtype in ['int64', 'float64']
 ]
 label = 'position'
 
@@ -50,6 +56,11 @@ if not numeric_columns.empty:
 encoder = LabelEncoder()
 if label in data.columns and data[label].dtype == 'object':
     data[label] = encoder.fit_transform(data[label])
+
+# Add historical average position as a feature
+if 'driver_number' in data.columns and 'position' in data.columns:
+    data['average_position'] = data.groupby('driver_number')['position'].transform('mean')
+    features.append('average_position')
 
 # Convert label to discrete categories if it's continuous
 if data[label].dtype != 'int' and data[label].dtype != 'object':
@@ -93,10 +104,9 @@ if features and label in data.columns:
         print(report)
 
         # Saving the Model for Predictions
-        joblib.dump(model, f'./models/{race_location.replace(" ", "_")}_gp_predictor_model.pkl')
+        joblib.dump(model, f'./models/{race_location.replace(" ", "_") if not load_all else "all_gp"}_gp_predictor_model.pkl')
         joblib.dump(scaler, './models/scaler.pkl')
     else:
         print("Error: Training data is empty. Please check the feature selection and data loading steps.")
 else:
     print("Error: One or more features or the label column are not present in the dataset.")
-

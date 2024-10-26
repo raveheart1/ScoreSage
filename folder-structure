@@ -1,0 +1,24 @@
+formula-1
+├── .venv
+├── data
+├── models
+│   └── placeholder.txt
+├── scripts
+│   └── data-collection
+│       ├── collect_car_data.py
+│       ├── collect_interview_data.py
+│       ├── collect_laps_data.py
+│       ├── collect_pit_data.py
+│       ├── collect_position_data.py
+│       ├── collect_race_data.py
+│       ├── collect_session_data.py
+│       ├── collect_stints_data.py
+│       ├── collect_weather_data.py
+│       ├── f1-data-collection.py
+│       └── utils.py
+├── predict.py
+├── train-model.py
+├── README.md
+├── requirements.txt
+├── premier-league
+└── .gitignore
