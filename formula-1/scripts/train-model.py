@@ -64,7 +64,7 @@ if 'driver_number' in data.columns and 'position' in data.columns:
 
 # Convert label to discrete categories if it's continuous
 if data[label].dtype != 'int' and data[label].dtype != 'object':
-    data[label] = pd.qcut(data[label], q=4, labels=False)
+    data[label] = pd.qcut(data[label], q=4, labels=False, duplicates='drop')
 
 # Check if selected features and label exist in data
 if features and label in data.columns:
