@@ -1,4 +1,22 @@
 ScoreSage
+├── data                     # Main directory for storing all raw and processed data
+│   ├── formula-1            # Data related to Formula 1
+│   │   ├── raw              # Raw data
+│   │   ├── processed        # Processed data ready for modeling
+│   │   └── metadata.json    # Optional: Metadata or schema for Formula 1 data
+│   ├── premier-league       # Data related to Premier League
+│   │   ├── raw
+│   │   ├── processed
+│   │   └── metadata.json
+│   ├── nba                  # Data related to NBA
+│   │   ├── raw
+│   │   ├── processed
+│   │   └── metadata.json
+│   ├── nfl                  # Data related to NFL
+│   │   ├── raw
+│   │   ├── processed
+│   │   └── metadata.json
+│   └── README.md            # Documentation for data organization
 ├── api                      # Backend API (Azure Functions, Flask, etc.)
 │   ├── main.py
 │   ├── requirements.txt
@@ -11,8 +29,7 @@ ScoreSage
 │   │   ├── services         # API calls (e.g., axios)
 │   │   └── App.js
 │   ├── package.json
-│   └── README.md
-├── data                     # Raw and processed data
+│   └── README.md                    
 ├── models                   # Trained ML models
 │   └── README.md
 ├── scripts                  # Data collection and preprocessing scripts
