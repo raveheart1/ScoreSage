@@ -1,24 +1,31 @@
-formula-1
-├── .venv
-├── data
-├── models
-│   └── placeholder.txt
-├── scripts
-│   └── data-collection
-│       ├── collect_car_data.py
-│       ├── collect_interview_data.py
-│       ├── collect_laps_data.py
-│       ├── collect_pit_data.py
-│       ├── collect_position_data.py
-│       ├── collect_race_data.py
-│       ├── collect_session_data.py
-│       ├── collect_stints_data.py
-│       ├── collect_weather_data.py
-│       ├── f1-data-collection.py
-│       └── utils.py
-├── predict.py
-├── train-model.py
+ScoreSage
+├── api                      # Backend API (Azure Functions, Flask, etc.)
+│   ├── main.py
+│   ├── requirements.txt
+│   └── README.md
+├── app                      # React frontend
+│   ├── public
+│   ├── src
+│   │   ├── components       # Reusable React components
+│   │   ├── pages            # Page-specific components
+│   │   ├── services         # API calls (e.g., axios)
+│   │   └── App.js
+│   ├── package.json
+│   └── README.md
+├── data                     # Raw and processed data
+├── models                   # Trained ML models
+│   └── README.md
+├── scripts                  # Data collection and preprocessing scripts
+│   ├── data-collection
+│   │   ├── collect_car_data.py
+│   │   └── ...
+│   └── utils.py
+├── terraform                # Infrastructure as code
+│   ├── main.tf
+│   ├── variables.tf
+│   └── outputs.tf
+├── predict.py               # Prediction script
+├── train-model.py           # Model training script
+├── .gitignore
 ├── README.md
-├── requirements.txt
-├── premier-league
-└── .gitignore
+└── requirements.txt         # Backend Python dependencies
