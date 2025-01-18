@@ -35,7 +35,7 @@ output "storage_container_api" {
 
 output "app_service_plan_name" {
   description = "The name of the app service plan."
-  value       = azurerm_app_service_plan.scoresage_asp.name
+  value       = azurerm_service_plan.scoresage_asp.name
 }
 
 output "function_app_name" {
