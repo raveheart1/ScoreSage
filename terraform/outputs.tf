@@ -48,11 +48,6 @@ output "function_app_identity_principal_id" {
   value       = azurerm_linux_function_app.example.identity[0].principal_id
 }
 
-output "python_script_blob_url" {
-  description = "The URL of the uploaded Python script blob."
-  value       = azurerm_storage_blob.python_script.url
-}
-
 output "function_app_function_name" {
   description = "The name of the deployed function in the Function App."
   value       = azurerm_function_app_function.example.name
