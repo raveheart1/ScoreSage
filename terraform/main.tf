@@ -33,22 +33,22 @@ resource "azurerm_service_plan" "scoresage_asp" {
   name                = "scoresage-asp"
   location            = azurerm_resource_group.scoresage_rg.location
   resource_group_name = azurerm_resource_group.scoresage_rg.name
-  os_type             = "Linux"  # Specify the operating system type
-  sku_name            = "P1v2"     # Specify the SKU name
+  os_type             = "Linux" 
+  sku_name            = "P1v2"   
 }
 
-resource "azurerm_linux_function_app" "example" {
-  name                       = "example-linux-function-app"
-  resource_group_name        = azurerm_resource_group.scoresage_rg.name
-  location                   = azurerm_resource_group.scoresage_rg.location
-  service_plan_id            = azurerm_service_plan.scoresage_asp.id
-  storage_account_name       = azurerm_storage_account.scoresage_sa01.name
-  storage_account_access_key = azurerm_storage_account.scoresage_sa01.primary_access_key
+resource "azurerm_linux_web_app" "example" {
+  name                = "scoresage-app"
+  location            = azurerm_resource_group.scoresage_rg.location
+  resource_group_name = azurerm_resource_group.scoresage_rg.name
+  service_plan_id     = azurerm_service_plan.scoresage_asp.id
 
   site_config {
     application_stack {
-      python_version = "3.9"
+      python_version = "3.9"  # Python runtime version
     }
+    always_on = true
+    ftps_state = "Disabled" # Secure the app by disabling FTP
   }
 
   app_settings = {
